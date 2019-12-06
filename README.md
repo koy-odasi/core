@@ -42,8 +42,8 @@
 ### `Install`: Site Kurulum İşlemleri
 ---
 
-	git clone git://github.com/gdemir/blog-init.git
-	cd blog-init
+	git clone git://github.com/koy-odasi/kernel.git
+	cd kernel
 	rake install
 
 ### `Config`: Yapılandırma Dosyası(_/_config.yml) İşlemleri

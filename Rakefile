@@ -62,10 +62,11 @@ task :install => "config:init" do
     puts "Şimdi Git kaynak dosyası düzenlenecek."
 
     # GitHub kullanıcı ismi sor
+    ask_user = "GitHub Kullanıcı İsmi veya Organizasyon Adı: "
     user = if ([nil, '']).include?(user = config_get('github'))
-             get_stdin("GitHub Kullanıcı İsmi: ")
+             get_stdin(ask_user)
            else
-             ask_default("GitHub Kullanıcı İsmi: ", user)
+             ask_default(ask_user, user)
            end
 
     # GitHub üzerinde sitenin depolanacağı ismi sor
@@ -102,6 +103,7 @@ task :install => "config:init" do
       → #{url}
 
     [ ! ] : Lütfen aşağıdaki depoyu oluşturduğunuzdan emin olun.
+    Ancak master veya gh-pages gibi bir branch oluşturmayın.
     (Oluşturmak için: https://github.com/new)
 
        → #{repo_path}

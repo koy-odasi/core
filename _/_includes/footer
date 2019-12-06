@@ -19,7 +19,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="http://github.com/gdemir/blog-init">
+    <a class="navbar-brand" href="http://github.com/koy-odasi/kernel">
       <img src="{{ site.url }}/assets/img/default.png" style="width:20px; height:20px"/>
     </a>
   </div>

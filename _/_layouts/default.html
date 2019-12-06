@@ -64,15 +64,9 @@ layout: nil
     <script type="text/javascript" src="{{ site.url }}/assets/js/responsive.bootstrap.min.js"></script>
     <!-- Jquery Datatables Responsive Bootstrap end -->
 
-    <!-- Pace start -->
-    <!-- source: https://github.com/HubSpot/pace -->
-    <script src="{{ site.url }}/assets/js/pace.min.js"></script>
-    <link href="{{ site.url }}/assets/css/pace.css" rel="stylesheet" />
     <script type="text/javascript">
     $(document).ready(function() {
-      Pace.on("done", function() {
 
-        $("#contents").fadeToggle(1000);
 
         /* Jquery Datatables Language start */
         /* source: https://datatables.net/examples/basic_init/language.html */
@@ -95,19 +89,12 @@ layout: nil
         /* Jquery Datatables Language end */
         /* Jquery Datatables Responsive Bootstrap end */
 
-      });
     });
     </script>
-    <style type="text/css">
-    #contents {
-      display: none;
-    }
-    </style>
-    <!-- Pace end -->
 
   </head>
   <body>
-    <div id="contents">
+    <div>
 
       {% include navbar %}
 

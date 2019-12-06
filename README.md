@@ -8,7 +8,6 @@
  - [DataTables](http://datatables.net)
  - [Highlightjs](https://highlightjs.org)
  - [Animatecss](https://daneden.github.io/animate.css)
- - [Pace](https://github.com/HubSpot/pace/)
 
 ## Requirement Packages
 

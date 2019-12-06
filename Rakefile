@@ -75,7 +75,7 @@ task :install => "config:init" do
     branch = (repo.match(/[\w-]+\.github\.(?:io|com)/).nil?) ? 'gh-pages' : 'master'
 
     # GitHub üzerinde sitenin depolanacağı brancha göre url seç
-    url = if branch == "gh-pages" then "http://#{user}.github.io/#{repo}" else "http://#{user}.github.io" end
+    url = if branch == "gh-pages" then "https://#{user}.github.io/#{repo}" else "https://#{user}.github.io" end
 
     # GitHub üzerinde sitenin bulundurulacağı depo yolu
     repo_path = "http://github.com/#{user}/#{repo}"
@@ -114,10 +114,10 @@ task :install => "config:init" do
     # GitHub repo için brancha geç ve url kaydet
     if branch == "gh-pages"
       switch_branch("gh-pages")
-      config_set 'url', "http://#{user}.github.io/#{repo}"
+      config_set 'url', "https://#{user}.github.io/#{repo}"
     elsif
       switch_branch("master")
-      config_set 'url', "http://#{user}.github.io"
+      config_set 'url', "https://#{user}.github.io"
     end
 
     # siteyi harmanla

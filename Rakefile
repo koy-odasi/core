@@ -102,8 +102,9 @@ task :install => "config:init" do
 
       → #{url}
 
-    [ ! ] : Lütfen aşağıdaki depoyu oluşturduğunuzdan emin olun.
-    Ancak master veya gh-pages gibi bir branch oluşturmayın.
+    [ ! ] : 
+    1 - Lütfen aşağıdaki depoyu oluşturduğunuzdan emin olun.
+    2 - Depoya hiçbir dosya eklemeyin. (Ör.: README)
     (Oluşturmak için: https://github.com/new)
 
        → #{repo_path}

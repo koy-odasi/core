@@ -2,7 +2,7 @@
 layout: post
 title: Köy Odası
 category: documentation
-tags: bootstrap fontawesome highlightjs animatecss pace
+tags: bootstrap fontawesome highlightjs animatecss
 ---
 
 # Welcome to Köy Odası
@@ -15,7 +15,6 @@ tags: bootstrap fontawesome highlightjs animatecss pace
  - [DataTables](http://datatables.net)
  - [Highlightjs](https://highlightjs.org)
  - [Animatecss](https://daneden.github.io/animate.css)
- - [Pace](https://github.com/HubSpot/pace/)
 
 ## Requirement Packages
 

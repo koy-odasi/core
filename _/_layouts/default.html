@@ -1,0 +1,143 @@
+---
+layout: nil
+---
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="tr" lang="tr">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="{{ site.author }}" />
+  <meta name="description" content="{{ site.description }}" />
+  <meta name="keywords" content="{{ site.keywords }}" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>{% if page.title %}{{ page.title }} &#8211; {% endif %}{{ site.title }}</title>
+
+  {% if site.feed == null %}
+  <link href="{{ site.feed }}" rel="alternate" title="{{ page.title }}" type="application/atom+xml" />
+  {% endif %}
+
+  <link rel="shortcut icon" href="{{ site.url }}/favicon.ico">
+  <link rel="stylesheet" type="text/css" href="{{ site.url }}/assets/css/syntax.css" />
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Monda" />
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="{{ site.url }}/assets/js/html5shiv.js"></script>
+    <script src="{{ site.url }}/assets/js/respond.min.js"></script>
+    <![endif]-->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="{{ site.url }}/assets/js/bootstrap.min.js"></script>
+
+    {% include googleanalytics %}
+
+    <!-- Highlightjs start -->
+    <!-- source: http://highlightjs.org -->
+    <link rel="stylesheet" type="text/css" href="{{ site.url }}/assets/css/highlight.pack.css" />
+    <script src="{{ site.url }}/assets/js/highlight.pack.js"></script>
+    <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+    </script>
+    <!-- Highlightjs end -->
+
+    <!-- Animatecss start -->
+    <!-- source: https://daneden.github.io/animate.css/ -->
+    <link rel="stylesheet" type="text/css" href="{{ site.url }}/assets/css/animate.min.css" />
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $('nav:first-child').addClass('animated fadeInDown');
+      $('.well table').addClass('animated slideInUp');
+    });
+    </script>
+    <!-- Animatecss end -->
+
+    <!-- Jquery Datatables Responsive Bootstrap start -->
+    <!-- source: https://datatables.net/extensions/responsive/examples/styling/bootstrap.html -->
+    <link rel="stylesheet" type="text/css" href="{{ site.url }}/assets/css/dataTables.bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="{{ site.url }}/assets/css/responsive.bootstrap.min.css" />
+
+    <script type="text/javascript" src="{{ site.url }}/assets/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="{{ site.url }}/assets/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{ site.url }}/assets/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="{{ site.url }}/assets/js/responsive.bootstrap.min.js"></script>
+    <!-- Jquery Datatables Responsive Bootstrap end -->
+
+    <!-- Pace start -->
+    <!-- source: https://github.com/HubSpot/pace -->
+    <script src="{{ site.url }}/assets/js/pace.min.js"></script>
+    <link href="{{ site.url }}/assets/css/pace.css" rel="stylesheet" />
+    <script type="text/javascript">
+    $(document).ready(function() {
+      Pace.on("done", function() {
+
+        $("#contents").fadeToggle(1000);
+
+        /* Jquery Datatables Language start */
+        /* source: https://datatables.net/examples/basic_init/language.html */
+        $('#example').dataTable( {
+          "order": [[ 1, "desc" ]],
+          "responsive": true,
+          "language": {
+            "lengthMenu": "Gösterilen _MENU_ adet satır",
+            "zeroRecords": "Kayıt Bulunamadı",
+            "info": "Toplam _PAGES_ sayfadan _PAGE_ sayfa gösteriliyor",
+            "infoEmpty": "Kayıt Sayısı Yok",
+            "infoFiltered": "(Toplam _MAX_ gönderi filtrelendi)",
+            "search": "Ara",
+            "paginate": {
+              "previous": "Önceki",
+              "next": "Sonraki"
+            }
+          }
+        });
+        /* Jquery Datatables Language end */
+        /* Jquery Datatables Responsive Bootstrap end */
+
+      });
+    });
+    </script>
+    <style type="text/css">
+    #contents {
+      display: none;
+    }
+    </style>
+    <!-- Pace end -->
+
+  </head>
+  <body>
+    <div id="contents">
+
+      {% include navbar %}
+
+      <div class="well well-sm">
+
+        <!-- Dynamic breadcrumb start -->
+        {% assign url_parts = page.url | remove: '/index.html' | split: '/' %}
+        <ul class="breadcrumb text-right">
+          <li><a href="{{ site.url }}" class="btn btn-default btn-sm"> Home</i></a></li>
+          {% assign permalink = "" %}
+          {% for path in url_parts offset:1 %}
+          {% assign permalink = permalink | append: '/' | append: path %}
+          <li><a href="{{ site.url }}{{ permalink }}" class="btn btn-default btn-sm">{{ path }}</a></li>
+          {% endfor %}
+          <li class="active">Index</li>
+        </ul>
+        <!-- Dynamic breadcrumb end -->
+
+      </div>
+
+      <div class="well">
+
+        {{ content }}
+
+      </div>
+
+      {% include footer %}
+
+      {% include disqus_count %}
+      {% include back_to_top %}
+    </div>
+  </body>
+  </html>

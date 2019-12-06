@@ -1,0 +1,64 @@
+<!-- Footer start -->
+<div class="well well-sm">
+  Aksi belirtilmedikçe <a href="{{ site.url }}">{{ site.author }}</a> tarafından tüm içerik hakları saklıdır.
+  Powered by
+  <a href="http://jekyllrb.com/">Jekyll</a>,
+  <a href="http://getbootstrap.com/">Bootstrap</a>,
+  <a href="http://fontawesome.io/">Awesome</a>,
+  <a href="http://datatables.net/">Datatables</a>,
+  <a href="https://highlightjs.org">Highlightjs</a>,
+  <a href="https://daneden.github.io/animate.css/">Animatecss</a>,
+  <a href="http://github.hubspot.com/pace/docs/welcome/">Pace</a>
+</div>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="navbar-header">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://github.com/gdemir/blog-init">
+      <img src="{{ site.url }}/assets/img/default.png" style="width:20px; height:20px"/>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+    <ul class="nav navbar-nav pull-left">
+      {% if site.email %}
+        <li><a href="mailto:{{ site.email }}" target="_blank" class="fa fa-envelope fa-2x"></a></li>
+      {% endif %}
+      {% if site.github %}
+        <li><a href="http://github.com/{{ site.github }}/" target="_blank" class="fa fa-github-square fa-2x"></a></li>
+      {% endif %}
+	    {% if site.trello %}
+  	    <li><a href="http://www.trello.com/{{ site.trello }}/" target="_blank" class="fa fa-trello fa-2x"></a></li>
+	    {% endif %}
+  	  {% if site.linkedin %}
+	      <li><a href="http://www.linkedin.com/in/{{ site.linkedin }}/" target="_blank" class="fa fa-linkedin-square fa-2x"></a></li>
+  	  {% endif %}
+	    {% if site.stack %}
+	      <li><a href="http://www.stackoverflow.com/users/{{ site.stack }}/" target="_blank" class="fa fa-stack-overflow fa-2x"></a></li>
+	    {% endif %}
+	    {% if site.googleplus %}
+	      <li><a href="http://plus.google.com/{{ site.googleplus }}/" target="_blank" class="fa fa-google-plus-square fa-2x"></a></li>
+	    {% endif %}
+	    {% if site.facebook %}
+	      <li><a href="http://facebook.com/{{ site.facebook }}/" target="_blank" class="fa fa-facebook-square fa-2x"></a></li>
+	    {% endif %}
+	    {% if site.twitter %}
+	      <li><a href="http://twitter.com/{{ site.twitter }}/" target="_blank" class="fa fa-twitter-square fa-2x"></a></li>
+	    {% endif %}
+	    {% if site.instagram %}
+  	    <li><a href="http://instagram.com/{{ site.instagram }}/" target="_blank" class="fa fa-instagram fa-2x"></a></li>
+	    {% endif %}
+	    {% if site.foursquare %}
+	      <li><a href="http://foursquare.com/{{ site.foursquare }}/" target="_blank" class="fa fa-foursquare fa-2x"></a></li>
+	    {% endif %}
+    </ul>
+    <ul class="nav navbar-nav pull-right">
+      <li><a href="{{ site.url }}/atom.xml" target="_blank" class="fa fa-rss-square fa-2x"></a></li>
+    </ul>
+  </div>
+</nav>
+<!-- Footer end -->

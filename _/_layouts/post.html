@@ -1,0 +1,75 @@
+---
+layout: default
+---
+
+<div class="text-center">
+  <h2>{{ page.title }}</h2>
+  <h4>
+    <span class="label label-default"><i class="fa fa-calendar"></i> {{ page.date | date: '%Y-%m-%d' }}</span>
+    {% for category in page.categories %}
+
+      &nbsp;
+      <a href="{{ site.url }}/categories/{{ category }}" class="label label-info">
+        <i class="fa fa-file"></i> {{ category }}
+      </a>
+
+    {% endfor %}
+    {% for tag in page.tags %}
+
+      &nbsp;
+      <a href="{{ site.url }}/tags/{{ tag }}" class="label label-danger">
+        <i class="fa fa-tag"></i> {{ tag }}
+      </a>
+
+    {% endfor %}
+
+    &nbsp;
+    <a href="#disqus_thread" class="label label-warning">
+      <i class="fa fa-comment-o"></i> Yorumlar
+    </a>
+  </h4>
+</div>
+<hr>
+
+{{ content }}
+
+<!-- Related start -->
+<div id="related">
+  <h4 class="page-header">Benzer Girdiler</h4>
+  <ul class="nav posts">
+    {% for post in site.posts %}
+      {% assign match = true %}
+      {% for post_tag in post.tags %}
+        {% for tag in page.tags %}
+        {% if match %}
+          {% if tag == post_tag %}
+              <li>
+                <a href="{{ site.url }}{{ post.url }}">
+                  {{ post.title }}
+                  <div class="pull-right hidden-xs">{{ post.date | date: '%Y-%m-%d' }}</div>
+                </a>
+              </li>
+            {% assign match = false %}
+          {% endif %}
+        {% endif %}
+        {% endfor %}
+      {% endfor %}
+    {% endfor %}
+  </ul>
+</div>
+<!-- Related end -->
+
+<hr>
+
+<!-- Next_Previous start -->
+<ul class="pager">
+  {% if page.previous %}
+    <li class="previous"><a href="{{ page.previous.url }}">&larr; {{ page.previous.title }}</a></li>
+  {% endif %}
+  {% if page.next %}
+    <li class="next"><a href="{{ page.next.url }}">{{ page.next.title }} &rarr;</a></li>
+  {% endif %}
+</ul>
+<!-- Next_Previous end -->
+
+{% include disqus %}

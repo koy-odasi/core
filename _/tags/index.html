@@ -1,0 +1,27 @@
+---
+layout: default
+title: Etiketler
+---
+
+<table id="example" class="table table-striped table-hover dt-responsive" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>Etiketler</th>
+      <th>Adet</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for tag in site.tags %}
+
+      <tr>
+        <td>
+          <a href ="{{ site.url }}/tags/{{ tag.first }}" class="label label-danger">
+            <i class="fa fa-tag"></i> {{ tag.first }}
+          </a>
+        </td>
+        <td>{{ tag.last.size }}</td>
+      </tr>
+
+    {% endfor %}
+  </tbody>
+</table>

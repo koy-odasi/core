@@ -231,7 +231,7 @@ namespace :update do
 
     # uzak depo yoksa ekle
     if `git config remote.upstream.url`.chomp.empty?
-      `git remote add upstream git://github.com/koy-odasi/kernel.git`
+      `git remote add upstream https://github.com/koy-odasi/kernel.git`
     end
 
     # uzak depodan güncelle

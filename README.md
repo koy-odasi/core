@@ -111,6 +111,16 @@
 
 	rake status:remote
 
+
+### `Find`: Gönderilerde Kelime Arama
+---
+
+	rake find[KEY]
+
+Örnek:
+
+	rake find[vim]
+
 ## License
 
 Köy Odası is released under the [MIT License](http://www.opensource.org/licenses/MIT).

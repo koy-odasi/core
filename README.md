@@ -39,7 +39,7 @@
 
 ### `Install`: Site Kurulum İşlemleri
 
-	git clone git://github.com/koy-odasi/core.git
+	git clone https://github.com/koy-odasi/core.git
 	cd core
 	rake install
 

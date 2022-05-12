@@ -34,19 +34,16 @@
 ## Commands
 
 ### `Help`: Rakefile Görev Komutları
----
 
 	rake
 
 ### `Install`: Site Kurulum İşlemleri
----
 
 	git clone git://github.com/koy-odasi/kernel.git
 	cd kernel
 	rake install
 
 ### `Config`: Yapılandırma Dosyası(_/_config.yml) İşlemleri
----
 
 	rake config
 
@@ -63,7 +60,6 @@
 	rake config:destroy
 
 ### `Build`: Site Harmanlama İşlemleri
----
 
 	rake build
 
@@ -76,12 +72,10 @@
 	rake build:destroy
 
 ### `View`: Demo Önizleme Oluştur
----
 
 	rake view
 
 ### `Update`: Uzak Repodan Güncelleme İşlemleri
----
 
 	rake update
 
@@ -94,12 +88,10 @@
 	rake update:config
 
 ### `Deploy`: Site Servis İşlemi
----
 
 	rake deploy
 
 ### `Status`: Site Güncel Kontrol İşlemi
----
 
 	rake status
 
@@ -113,7 +105,6 @@
 
 
 ### `Find`: Gönderilerde Kelime Arama
----
 
 	rake find[KEY]
 
@@ -121,7 +112,7 @@
 
 	rake find[vim]
 
-## License
+### License
 
 Köy Odası is released under the [MIT License](http://www.opensource.org/licenses/MIT).
 

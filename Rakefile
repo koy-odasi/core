@@ -26,7 +26,7 @@ highlighter: pygments
 markdown: rdiscount
 rdiscount:
   extensions: [smart]
-Ne 
+
 # Owner Configuration
 
 author:
@@ -80,7 +80,7 @@ task :install => "config:init" do
       config_set 'permalink', "/#{repo}/categories/:categories/:title/"
 
       # Url olarak sitenin barınacağı user, repoyu ekle
-      url = "https://#{user}.github.io/#{repo}" else "https://#{user}.github.io" end
+      url = "https://#{user}.github.io/#{repo}"
     elsif 
       branch = 'master'
 

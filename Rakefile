@@ -75,14 +75,18 @@ task :install => "config:init" do
     # GitHub üzerinde sitenin depolanacağı isme göre branch seç
     if (repo.match(/[\w-]+\.github\.(?:io|com)/).nil?)
       branch = 'gh-pages'
+
       # Alt dizin olduğu için permalink güncellemesi yap
       config_set 'permalink', "/#{repo}/categories/:categories/:title/"
+
+      # Url olarak sitenin barınacağı user, repoyu ekle
+      url = "https://#{user}.github.io/#{repo}" else "https://#{user}.github.io" end
     elsif 
       branch = 'master'
-    end
 
-    # GitHub üzerinde sitenin depolanacağı brancha göre url seç
-    url = if branch == "gh-pages" then "https://#{user}.github.io/#{repo}" else "https://#{user}.github.io" end
+      # Url olarak sitenin barınacağı user ekle
+      url = "https://#{user}.github.io" end
+    end
 
     # GitHub üzerinde sitenin bulundurulacağı depo yolu
     repo_path = "https://github.com/#{user}/#{repo}"

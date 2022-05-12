@@ -53,7 +53,7 @@ end
 # Her türlü kurulum yaparız abi, makarna yemeyiz abi, kebap yeriz abi
 task :install => "config:init" do
   # yeni bir kurulum mu, git kaynak dosyası ilk haliyle mi duruyor?
-  if `git config remote.origin.url`.chomp =~ %r{[:/]koy-odasi/kernel.git}
+  if `git config remote.origin.url`.chomp =~ %r{[:/]koy-odasi/core.git}
 
     # yapılandırma ayarlarını getir
     config = YAML.load_file(CONFIGFILE)
@@ -231,7 +231,7 @@ namespace :update do
 
     # uzak depo yoksa ekle
     if `git config remote.upstream.url`.chomp.empty?
-      `git remote add upstream https://github.com/koy-odasi/kernel.git`
+      `git remote add upstream https://github.com/koy-odasi/core.git`
     end
 
     # uzak depodan güncelle

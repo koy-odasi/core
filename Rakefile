@@ -26,7 +26,7 @@ highlighter: pygments
 markdown: rdiscount
 rdiscount:
   extensions: [smart]
-
+Ne 
 # Owner Configuration
 
 author:
@@ -73,7 +73,13 @@ task :install => "config:init" do
     repo = ask_default("GitHub Üzerinde Sitenin Bulundurulacağı Depo İsmi: ", "#{user}.github.io")
 
     # GitHub üzerinde sitenin depolanacağı isme göre branch seç
-    branch = (repo.match(/[\w-]+\.github\.(?:io|com)/).nil?) ? 'gh-pages' : 'master'
+    if (repo.match(/[\w-]+\.github\.(?:io|com)/).nil?)
+      branch = 'gh-pages'
+      # Alt dizin olduğu için permalink güncellemesi yap
+      config_set 'permalink', "/#{repo}/categories/:categories/:title/"
+    elsif 
+      branch = 'master'
+    end
 
     # GitHub üzerinde sitenin depolanacağı brancha göre url seç
     url = if branch == "gh-pages" then "https://#{user}.github.io/#{repo}" else "https://#{user}.github.io" end

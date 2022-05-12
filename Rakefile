@@ -79,7 +79,7 @@ task :install => "config:init" do
     url = if branch == "gh-pages" then "https://#{user}.github.io/#{repo}" else "https://#{user}.github.io" end
 
     # GitHub üzerinde sitenin bulundurulacağı depo yolu
-    repo_path = "http://github.com/#{user}/#{repo}"
+    repo_path = "https://github.com/#{user}/#{repo}"
 
     # yapılandırma dosyasında işlem yapmadan önce bilgilendirme yap
     puts \
@@ -144,6 +144,8 @@ namespace :status do
     if (file_changes = `git status --porcelain`) != ""
       puts "Aşağıdaki dosyalarda ekleme / güncelleme / silme mevcut.\n#{file_changes}"
       abort "Repo güncellenmedi." unless ask_yesno "Güncel verileri sitenize göndermek istiyor musunuz?", true
+      # siteyi #tag gibi özellikler için  harmanla, build'in bağımlıklarıyla
+      Rake::Task['build'].invoke
       # siteyi yükle, deploy'un bağımlıklarıyla
       Rake::Task['deploy'].invoke
     end

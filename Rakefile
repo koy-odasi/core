@@ -85,7 +85,7 @@ task :install => "config:init" do
       branch = 'master'
 
       # Url olarak sitenin barınacağı user ekle
-      url = "https://#{user}.github.io" end
+      url = "https://#{user}.github.io"
     end
 
     # GitHub üzerinde sitenin bulundurulacağı depo yolu

@@ -112,6 +112,10 @@
 
 	rake find[vim]
 
+### Contributing
+
+Köy Odasına katkıda bulunmanızı öneririz! Destek için https://github.com/koy-odasi
+
 ### License
 
 Köy Odası is released under the [MIT License](http://www.opensource.org/licenses/MIT).

@@ -5,7 +5,6 @@
       <th>Tarih</th>
       <th>Kategoriler</th>
       <th>Etiketler</th>
-      <th>Yorumlar</th>
     </tr>
   </thead>
   <tbody>
@@ -33,11 +32,6 @@
             </a>
 
           {% endfor %}
-        </td>
-        <td>
-          <a href="{{ site.url }}{{ post.url }}#disqus_thread" class="label label-warning">
-            <i class="fa fa-comment-o"></i> Yorumlar
-          </a>
         </td>
       </tr>
 

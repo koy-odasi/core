@@ -76,9 +76,6 @@ task :install => "config:init" do
     if (repo.match(/[\w-]+\.github\.(?:io|com)/).nil?)
       branch = 'gh-pages'
 
-      # Alt dizin olduğu için permalink güncellemesi yap
-      config_set 'permalink', "/#{repo}/categories/:categories/:title/"
-
       # Url olarak sitenin barınacağı user, repoyu ekle
       url = "https://#{user}.github.io/#{repo}"
     elsif 

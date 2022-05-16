@@ -38,7 +38,6 @@ disqus:
 github:
 trello:
 linkedin:
-googleplus:
 googleanalyticsid:
 twitter:
 facebook:

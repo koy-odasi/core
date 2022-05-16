@@ -31,7 +31,7 @@ layout: nil
     <script src="{{ site.url }}/assets/js/jquery-latest.min.js"></script>
     <script src="{{ site.url }}/assets/js/bootstrap.min.js"></script>
 
-    {% include googleanalytics %}
+    {% include google_tag_manager_script %}
 
     <!-- Highlightjs start -->
     <!-- source: http://highlightjs.org -->
@@ -93,6 +93,9 @@ layout: nil
 
   </head>
   <body>
+
+    {% include google_tag_manager_noscript %}
+
     <div>
 
       {% include navbar %}

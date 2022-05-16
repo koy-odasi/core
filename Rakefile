@@ -38,7 +38,7 @@ disqus:
 github:
 trello:
 linkedin:
-googleanalyticsid:
+googletagid:
 twitter:
 facebook:
 instagram:

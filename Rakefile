@@ -17,6 +17,7 @@ DEFAULTS  = "
 title:
 keywords:
 description:
+baseurl:
 url:
 
 # Jekyll Configuration
@@ -78,6 +79,9 @@ task :install => "config:init" do
 
       # Url olarak sitenin barınacağı user, repoyu ekle
       url = "https://#{user}.github.io/#{repo}"
+     
+      # Baseurl olarak repo yolu ekle 
+      config_set 'baseurl', "/#{repo}"
     elsif 
       branch = 'master'
 
@@ -400,7 +404,7 @@ def config_set key = nil, value = nil, default = nil
   config = YAML.load_file(CONFIGFILE)
   unless key and value
     config.each do |key, value|
-      config[key] = ask_default(key, value) unless %w(permalink highlighter markdown rdiscount).include? key
+      config[key] = ask_default(key, value) unless %w(permalink highlighter markdown rdiscount baseurl).include? key
     end
   else
     config[key] = default.nil? ? value : ask_default(key, value)

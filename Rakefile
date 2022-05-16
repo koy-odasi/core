@@ -366,6 +366,24 @@ task :find, :word do |task, args|
   end
 end
 
+# Sitede bulunan gönderilerden en son düzenleneni aç
+task :last do
+
+  chdir "#{SOURCE_DIR}/#{POST_DIR}" do
+    # son düzenlenen dosyanın ismini bul, son satırdaki gereksiz gelen `?` satırı chop ile sil
+    # kaynak : https://stackoverflow.com/questions/4561895/how-to-recursively-find-the-latest-modified-file-in-a-directory
+    filename = `find . -type f -printf '%T@ %p\n' \ | sort -n | tail -1 | cut -f2- -d" "`.chop
+
+    # bir şekilde editör kullanmalıyız
+    if ([nil, '']).include?(editor = config_get('editor'))
+      config_set "editor", ask_default("Kullandığınız Editör İsmi: ", "gedit")
+    end
+
+    # dosyamızı yapılandırma dosyasında belirtilen editörle aç
+    sh editor, filename
+  end
+end
+
 # Yerel fonksiyonlar
 
 def ask_yesno message = 'Devam?', default = true, validate = %w(e h)

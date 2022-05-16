@@ -82,7 +82,7 @@ task :install => "config:init" do
      
       # Baseurl olarak repo yolu ekle 
       config_set 'baseurl', "/#{repo}"
-    elsif 
+    else
       branch = 'master'
 
       # Url olarak sitenin barınacağı user ekle
@@ -129,7 +129,7 @@ task :install => "config:init" do
     if branch == "gh-pages"
       switch_branch("gh-pages")
       config_set 'url', "https://#{user}.github.io/#{repo}"
-    elsif
+    else
       switch_branch("master")
       config_set 'url', "https://#{user}.github.io"
     end

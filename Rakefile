@@ -78,8 +78,8 @@ task :install => "config:init" do
 
       # Url olarak sitenin barınacağı user, repoyu ekle
       url = "https://#{user}.github.io/#{repo}"
-     
-      # Baseurl olarak repo yolu ekle 
+
+      # Baseurl olarak repo yolu ekle
       config_set 'baseurl', "/#{repo}"
     else
       branch = 'master'
@@ -112,7 +112,7 @@ task :install => "config:init" do
 
       → #{url}
 
-    [ ! ] : 
+    [ ! ] :
     1 - Lütfen aşağıdaki depoyu oluşturduğunuzdan emin olun.
     2 - Depoya hiçbir dosya eklemeyin. (Ör.: README)
     (Oluşturmak için: https://github.com/new)
@@ -154,8 +154,6 @@ namespace :status do
     if (file_changes = `git status --porcelain`) != ""
       puts "Aşağıdaki dosyalarda ekleme / güncelleme / silme mevcut.\n#{file_changes}"
       abort "Repo güncellenmedi." unless ask_yesno "Güncel verileri sitenize göndermek istiyor musunuz?", true
-      # siteyi #tag gibi özellikler için  harmanla, build'in bağımlıklarıyla
-      Rake::Task['build'].invoke
       # siteyi yükle, deploy'un bağımlıklarıyla
       Rake::Task['deploy'].invoke
     end
@@ -333,11 +331,7 @@ task :new => :install do
 end
 
 # Siteyi repoya yolla
-task :deploy => :install do
-
-  # siteyi harmanla, build'in bağımlıklarıyla
-  Rake::Task['build'].invoke
-
+task :deploy => [:install, :build] do
   # depoya yolla
   `git add .`
   `git add -u`

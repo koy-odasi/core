@@ -176,8 +176,12 @@ namespace :build do
   # siteyi repoya yollamak için harmanla ve deploy kısmına taşı
   task :init => "config:init" do
 
+    puts "#{SOURCE_DIR} dizinine giriş yapılıyor."
+
     # jekyll çalıştır EXTRACT_DIR dizininde deploy edilecek dosyaları taşı ve dizini sil
     chdir SOURCE_DIR do
+      puts "jekyll çalıştırılıp oluşturulan #{EXTRACT_DIR}/ dizini altındaki kodlar, bir üst dizine taşınacak ve #{EXTRACT_DIR} dizini silinecek"
+
       `jekyll build`
       `mv #{EXTRACT_DIR}/* ../ 2>/dev/null`
       `rm -rf #{EXTRACT_DIR}`

@@ -1,5 +1,5 @@
-<!-- Disqus start -->
 {% if site.disqus %}
+<!-- Disqus start -->
   <div id="disqus_thread"></div>
   <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -14,5 +14,5 @@
   <noscript>
     Lütfen bu sayfaya gelen  <a href="http://disqus.com/?ref_noscript">yorumları</a>görmek için tarayıcınızın JavaScript desteğini etkinleştirin.
   </noscript>
-{% endif %}
 <!-- Disqus end -->
+{% endif %}

@@ -240,8 +240,9 @@ namespace :config do
     # bir şekilde editör kullanmalıyız
     if ([nil, '']).include?(editor = config_get('editor'))
       config_set "editor", ask_default("Kullandığınız Editör İsmi: ", "gedit")
+    else
+      puts "Editör atanmış."
     end
-    puts "Editör olarak #{editor} ayarlandı."
   end
 end
 
@@ -393,7 +394,8 @@ task :editor => :install do
   # bir şekilde editör kullanmalıyız
   editor = config_get('editor')
   new_editor = ask_default("Kullandığınız Editör İsmi: ", editor)
-  puts "Yeni editor #{editor} olarak güncellendi"
+  config_set "editor", new_editor
+  puts "Yeni editor olarak #{new_editor} ayarlandı."
 end
 
 # Yerel fonksiyonlar

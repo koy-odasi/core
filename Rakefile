@@ -238,10 +238,11 @@ namespace :config do
   # site editor anaharını boş ise atama yap
   task :editor => :install do
     # bir şekilde editör kullanmalıyız
-    if ([nil, '']).include?(editor = config_get('editor'))
+    editor = config_get('editor')
+    if ([nil, '']).include?(editor)
       config_set "editor", ask_default("Kullandığınız Editör İsmi: ", "gedit")
     else
-      puts "Editör atanmış."
+      puts "Editör #{editor} olarak atanmış."
     end
   end
 end

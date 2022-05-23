@@ -234,6 +234,15 @@ namespace :config do
     # yerelde siteyi güncelledik mi?
     Rake::Task['status:local'].execute
   end
+
+  # site editor anaharını boş ise atama yap
+  task :editor => :install do
+    # bir şekilde editör kullanmalıyız
+    if ([nil, '']).include?(editor = config_get('editor'))
+      config_set "editor", ask_default("Kullandığınız Editör İsmi: ", "gedit")
+    end
+    puts "Editör olarak #{editor} ayarlandı."
+  end
 end
 
 # Uzak repodan, dosyaları ya da yapılandırma dosyasını güncelle
@@ -290,7 +299,7 @@ task :view => "config:init" do
 end
 
 # Yeni bir gönderi oluşturma
-task :new => :install do
+task :new => [:install, "config:editor"] do
   url_title = ask_default("Gönderi url başlığını girin:", "hello-world")
   title = ask_default("Gönderinin başlığını girin:", url_title.gsub('-', ' ').split(' ').map(&:capitalize).join(' '))
   filename = "#{SOURCE_DIR}/_posts/#{Time.now.strftime('%Y-%m-%d')}-#{url_title}.md"
@@ -325,10 +334,8 @@ task :new => :install do
     post.puts "---"
   end
 
-  # bir şekilde editör kullanmalıyız
-  if ([nil, '']).include?(editor = config_get('editor'))
-    config_set "editor", ask_default("Kullandığınız Editör İsmi: ", "gedit")
-  end
+  # kullandığımız editörü alalım
+  editor = config_get('editor')
 
   # dosyamızı yapılandırma dosyasında belirtilen editörle aç
   sh editor, filename
@@ -365,13 +372,12 @@ task :find, :word do |task, args|
 end
 
 # Sitede bulunan gönderilerden en son düzenleneni aç
-task :last do
+task :last => "config:editor" do
 
-  # bir şekilde editör kullanmalıyız
-  if ([nil, '']).include?(editor = config_get('editor'))
-    config_set "editor", ask_default("Kullandığınız Editör İsmi: ", "gedit")
-  end
+  # kullandığımız editörü alalım
+  editor = config_get('editor')
 
+   # gönderiler dizinine gir
   chdir "#{SOURCE_DIR}/#{POST_DIR}" do
     # son düzenlenen dosyanın ismini bul, son satırdaki gereksiz gelen `?` satırı chop ile sil
     # kaynak : https://stackoverflow.com/questions/4561895/how-to-recursively-find-the-latest-modified-file-in-a-directory
@@ -380,6 +386,14 @@ task :last do
     # dosyamızı yapılandırma dosyasında belirtilen editörle aç
     sh editor, filename
   end
+end
+
+# Site yapılandırma dosyasındaki editor anahatarını güncelle
+task :editor => :install do
+  # bir şekilde editör kullanmalıyız
+  editor = config_get('editor')
+  new_editor = ask_default("Kullandığınız Editör İsmi: ", editor)
+  puts "Yeni editor #{editor} olarak güncellendi"
 end
 
 # Yerel fonksiyonlar

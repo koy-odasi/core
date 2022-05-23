@@ -26,7 +26,7 @@ permalink: /categories/:categories/:title/
 highlighter: pygments
 markdown: rdiscount
 rdiscount:
-extensions: [smart]
+  extensions: [smart]
 
 # Owner Configuration
 
@@ -64,10 +64,10 @@ task :install => "config:init" do
     # GitHub kullanıcı ismi sor
     ask_user = "GitHub Kullanıcı İsmi veya Organizasyon Adı: "
     user = if ([nil, '']).include?(user = config_get('github'))
-     get_stdin(ask_user)
-   else
-     ask_default(ask_user, user)
-   end
+             get_stdin(ask_user)
+           else
+             ask_default(ask_user, user)
+           end
 
     # GitHub üzerinde sitenin depolanacağı ismi sor
     repo = ask_default("GitHub Üzerinde Sitenin Bulundurulacağı Depo İsmi: ", "#{user}.github.io")
@@ -98,26 +98,26 @@ task :install => "config:init" do
 
     GitHub kullanıcı adı
 
-    → #{user}
+      → #{user}
 
     GitHub üzerinde sitenin bulundurulacağı depo yolu
 
-    → #{repo_path}
+      → #{repo_path}
 
     GitHub üzerinde sitenin bulunduğu deponun branchı
 
-    → #{branch}
+      → #{branch}
 
     Sitenin servis edileceği link
 
-    → #{url}
+      → #{url}
 
     [ ! ] :
     1 - Lütfen aşağıdaki depoyu oluşturduğunuzdan emin olun.
     2 - Depoya hiçbir dosya eklemeyin. (Ör.: README)
     (Oluşturmak için: https://github.com/new)
 
-    → #{repo_path}
+       → #{repo_path}
     "
     abort "İşlem sona erdi" unless ask_yesno "Kurulum için devam etmek istiyor musunuz?", true
 
@@ -234,14 +234,6 @@ namespace :config do
     # yerelde siteyi güncelledik mi?
     Rake::Task['status:local'].execute
   end
-
-  # site yapılandırma editörü atanmamışsa, sor bakalım vim sever mi
-  task :editor => :install do
-    # bir şekilde editör kullanmalıyız
-    if ([nil, '']).include?(editor = config_get('editor'))
-      config_set "editor", ask_default("Kullandığınız Editör İsmi: ", "gedit")
-    end
-  end
 end
 
 # Uzak repodan, dosyaları ya da yapılandırma dosyasını güncelle
@@ -298,7 +290,7 @@ task :view => "config:init" do
 end
 
 # Yeni bir gönderi oluşturma
-task :new => [:install, "config:editor"] do
+task :new => :install do
   url_title = ask_default("Gönderi url başlığını girin:", "hello-world")
   title = ask_default("Gönderinin başlığını girin:", url_title.gsub('-', ' ').split(' ').map(&:capitalize).join(' '))
   filename = "#{SOURCE_DIR}/_posts/#{Time.now.strftime('%Y-%m-%d')}-#{url_title}.md"
@@ -306,23 +298,23 @@ task :new => [:install, "config:editor"] do
     abort "İşlem sona erdi" unless ask_yesno "#{filename} mevcut. Üzerine yazmak istiyor musunuz?", false
   end
   puts \
-  "
-  Şimdi #{filename} kaynak dosyası düzenlenecek.
+    "
+    Şimdi #{filename} kaynak dosyası düzenlenecek.
 
-  Aşağıdaki kısmı değiştirmeyin:
+    Aşağıdaki kısmı değiştirmeyin:
 
-  → layout: post
+      → layout: post
 
-  Aşağıdaki kısmı isterseniz güncelleyebilirsiniz:
+    Aşağıdaki kısmı isterseniz güncelleyebilirsiniz:
 
-  → title: #{title}
+      → title: #{title}
 
-  Lütfen düzenlemeniz tamamlandıktan sonra aşağıdaki
-  bilgileri eklemeyi unutmayın:
+    Lütfen düzenlemeniz tamamlandıktan sonra aşağıdaki
+    bilgileri eklemeyi unutmayın:
 
-  → category:
-  → tags:
-  "
+      → category:
+      → tags:
+    "
   ask_default("Devam etmek için herhangi bir tuşa basın...", "Devam")
   open(filename, 'w') do |post|
     post.puts "---"
@@ -333,8 +325,12 @@ task :new => [:install, "config:editor"] do
     post.puts "---"
   end
 
+  # bir şekilde editör kullanmalıyız
+  if ([nil, '']).include?(editor = config_get('editor'))
+    config_set "editor", ask_default("Kullandığınız Editör İsmi: ", "gedit")
+  end
+
   # dosyamızı yapılandırma dosyasında belirtilen editörle aç
-  editor = config_get('editor')
   sh editor, filename
 end
 
@@ -359,35 +355,31 @@ task :find, :word do |task, args|
     filecontents = `grep -i --color=always #{word} *`
     puts \
     "
-    Aranan kelime → #{word}
+      Aranan kelime → #{word}
 
-    Benzer dosya isimleri → \n#{filenames}
+      Benzer dosya isimleri → \n#{filenames}
 
-    İçerik olarak benzer dosya isimleri → \n#{filecontents}
+      İçerik olarak benzer dosya isimleri → \n#{filecontents}
     "
   end
 end
 
 # Sitede bulunan gönderilerden en son düzenleneni aç
-task :last => "config:editor" do
+task :last do
 
-  # gönderi dizinine girerek işlem yap
+  # bir şekilde editör kullanmalıyız
+  if ([nil, '']).include?(editor = config_get('editor'))
+    config_set "editor", ask_default("Kullandığınız Editör İsmi: ", "gedit")
+  end
+
   chdir "#{SOURCE_DIR}/#{POST_DIR}" do
     # son düzenlenen dosyanın ismini bul, son satırdaki gereksiz gelen `?` satırı chop ile sil
     # kaynak : https://stackoverflow.com/questions/4561895/how-to-recursively-find-the-latest-modified-file-in-a-directory
     filename = `find . -type f -printf '%T@ %p\n' \ | sort -n | tail -1 | cut -f2- -d" "`.chop
 
     # dosyamızı yapılandırma dosyasında belirtilen editörle aç
-    editor = config_get('editor')
     sh editor, filename
   end
-end
-
-# Yapılandırmadaki editörü güncelleyelim
-task :editor do
-  # kullandığımız editörü göstererek güncellemesini isteyelim
-  editor = config_get('editor')
-  config_set "editor", ask_default("Kullandığınız Editör İsmi: ", editor)
 end
 
 # Yerel fonksiyonlar

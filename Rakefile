@@ -290,7 +290,7 @@ task :view => "config:init" do
 end
 
 # Yeni bir gönderi oluşturma
-task :new => :install do
+task :new => [:install, :editor] do
   url_title = ask_default("Gönderi url başlığını girin:", "hello-world")
   title = ask_default("Gönderinin başlığını girin:", url_title.gsub('-', ' ').split(' ').map(&:capitalize).join(' '))
   filename = "#{SOURCE_DIR}/_posts/#{Time.now.strftime('%Y-%m-%d')}-#{url_title}.md"
@@ -331,6 +331,7 @@ task :new => :install do
   end
 
   # dosyamızı yapılandırma dosyasında belirtilen editörle aç
+  editor = config_get('editor')
   sh editor, filename
 end
 
@@ -365,20 +366,25 @@ task :find, :word do |task, args|
 end
 
 # Sitede bulunan gönderilerden en son düzenleneni aç
-task :last do
+task :last => :editor do
 
-  # bir şekilde editör kullanmalıyız
-  if ([nil, '']).include?(editor = config_get('editor'))
-    config_set "editor", ask_default("Kullandığınız Editör İsmi: ", "gedit")
-  end
-
+  # gönderi dizinine girerek işlem yap
   chdir "#{SOURCE_DIR}/#{POST_DIR}" do
     # son düzenlenen dosyanın ismini bul, son satırdaki gereksiz gelen `?` satırı chop ile sil
     # kaynak : https://stackoverflow.com/questions/4561895/how-to-recursively-find-the-latest-modified-file-in-a-directory
     filename = `find . -type f -printf '%T@ %p\n' \ | sort -n | tail -1 | cut -f2- -d" "`.chop
 
     # dosyamızı yapılandırma dosyasında belirtilen editörle aç
+    editor = config_get('editor')
     sh editor, filename
+  end
+end
+
+# Yapılandırma da editör kullanmak zorundayız, sor bakalım vim sever mi
+task :editor do
+  # bir şekilde editör kullanmalıyız
+  if ([nil, '']).include?(editor = config_get('editor'))
+    config_set "editor", ask_default("Kullandığınız Editör İsmi: ", "gedit")
   end
 end
 
